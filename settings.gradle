@@ -1,0 +1,3 @@
+include ':lib_modify'
+include ':app'
+rootProject.name = "AndroidJavassist"

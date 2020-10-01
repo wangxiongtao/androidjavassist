@@ -1,0 +1,30 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.tools.build:gradle:4.0.1"
+    implementation 'org.javassist:javassist:3.20.0-GA'
+}
+repositories {
+    google()
+    jcenter()
+}
+
+//下面的配置是为了发布到本地，发布到本地主要是测试方便
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: uri('../repo'))//打包存放的位置，这里存放在Module的同级位置
+        pom.groupId = 'com.dawn.lib_modify'//包名
+        pom.artifactId = 'MyPlugin'//在需要引用插件时用到
+        pom.version = '1.0.1'//插件版本
+    }
+
+
+}
+
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
